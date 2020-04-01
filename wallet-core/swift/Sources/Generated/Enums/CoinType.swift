@@ -46,6 +46,7 @@ public enum CoinType: UInt32, CaseIterable {
     case tezos = 1729
     case theta = 500
     case thunderToken = 1001
+    case neo = 888
     case tomoChain = 889
     case tron = 195
     case veChain = 818
