@@ -33,6 +33,30 @@ public final class NEOSigner {
         return try! TW_NEO_Proto_SigningOutput(serializedData: resultData)
     }
 
+    public static func message(data: TW_NEO_Proto_SigningInput) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        return TWDataNSData(TWNEOSignerMessage(dataData))
+    }
+
+    public static func transaction(data: TW_NEO_Proto_SigningInput, publicKey: Data, signature: Data) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        let publicKeyData = TWDataCreateWithNSData(publicKey)
+        defer {
+            TWDataDelete(publicKeyData)
+        }
+        let signatureData = TWDataCreateWithNSData(signature)
+        defer {
+            TWDataDelete(signatureData)
+        }
+        return TWDataNSData(TWNEOSignerTransaction(dataData, publicKeyData, signatureData))
+    }
+
     let rawValue: OpaquePointer
 
     init(rawValue: OpaquePointer) {

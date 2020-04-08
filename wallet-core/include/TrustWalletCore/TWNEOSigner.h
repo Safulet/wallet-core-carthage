@@ -21,4 +21,12 @@ TW_NEO_Proto_TransactionPlan TWNEOSignerPlanTransaction(TW_NEO_Proto_SigningInpu
 TW_EXPORT_STATIC_METHOD
 TW_NEO_Proto_SigningOutput TWNEOSignerSign(TW_NEO_Proto_SigningInput input, TW_NEO_Proto_TransactionPlan plan);
 
+/// Builds a message to be signed
+TW_EXPORT_STATIC_METHOD
+TWData *_Nonnull TWNEOSignerMessage(TW_NEO_Proto_SigningInput data);
+
+/// Builds a transaction to be broadcasted
+TW_EXPORT_STATIC_METHOD
+TWData *_Nonnull TWNEOSignerTransaction(TW_NEO_Proto_SigningInput data, TWData *_Nonnull publicKey, TWData *_Nonnull signature);
+
 TW_EXTERN_C_END
