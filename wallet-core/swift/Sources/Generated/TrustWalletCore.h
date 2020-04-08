@@ -76,6 +76,8 @@ FOUNDATION_EXPORT const unsigned char TrustWalletCoreVersionString[];
 #include <TrustWalletCore/TWKeyDerivation.h>
 #include <TrustWalletCore/TWNEARAddress.h>
 #include <TrustWalletCore/TWNEARSigner.h>
+#include <TrustWalletCore/TWNEOAddress.h>
+#include <TrustWalletCore/TWNEOSigner.h>
 #include <TrustWalletCore/TWNULSAddress.h>
 #include <TrustWalletCore/TWNULSSigner.h>
 #include <TrustWalletCore/TWNanoAddress.h>
