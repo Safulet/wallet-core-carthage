@@ -43,6 +43,9 @@ public struct TW_Ripple_Proto_SigningInput {
 
   public var privateKey: Data = SwiftProtobuf.Internal.emptyData
 
+  /// only used by tss chain-integration
+  public var publicKey: Data = SwiftProtobuf.Internal.emptyData
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -77,6 +80,7 @@ extension TW_Ripple_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
     7: .standard(proto: "destination_tag"),
     8: .same(proto: "flags"),
     9: .standard(proto: "private_key"),
+    10: .standard(proto: "public_key"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -91,6 +95,7 @@ extension TW_Ripple_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
       case 7: try decoder.decodeSingularInt64Field(value: &self.destinationTag)
       case 8: try decoder.decodeSingularInt64Field(value: &self.flags)
       case 9: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 10: try decoder.decodeSingularBytesField(value: &self.publicKey)
       default: break
       }
     }
@@ -124,6 +129,9 @@ extension TW_Ripple_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
     if !self.privateKey.isEmpty {
       try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 9)
     }
+    if !self.publicKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.publicKey, fieldNumber: 10)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -137,6 +145,7 @@ extension TW_Ripple_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
     if lhs.destinationTag != rhs.destinationTag {return false}
     if lhs.flags != rhs.flags {return false}
     if lhs.privateKey != rhs.privateKey {return false}
+    if lhs.publicKey != rhs.publicKey {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
