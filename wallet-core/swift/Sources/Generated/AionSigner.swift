@@ -20,6 +20,30 @@ public final class AionSigner {
         return try! TW_Aion_Proto_SigningOutput(serializedData: resultData)
     }
 
+    public static func message(data: TW_Aion_Proto_SigningInput) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        return TWDataNSData(TWAionSignerMessage(dataData))
+    }
+
+    public static func transaction(data: TW_Aion_Proto_SigningInput, pubKey: Data, signature: Data) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        let pubKeyData = TWDataCreateWithNSData(pubKey)
+        defer {
+            TWDataDelete(pubKeyData)
+        }
+        let signatureData = TWDataCreateWithNSData(signature)
+        defer {
+            TWDataDelete(signatureData)
+        }
+        return TWDataNSData(TWAionSignerTransaction(dataData, pubKeyData, signatureData))
+    }
+
     let rawValue: OpaquePointer
 
     init(rawValue: OpaquePointer) {
