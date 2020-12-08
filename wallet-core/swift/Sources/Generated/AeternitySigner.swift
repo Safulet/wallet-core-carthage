@@ -20,6 +20,26 @@ public final class AeternitySigner {
         return try! TW_Aeternity_Proto_SigningOutput(serializedData: resultData)
     }
 
+    public static func message(data: TW_Aeternity_Proto_SigningInput) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        return TWDataNSData(TWAeternitySignerMessage(dataData))
+    }
+
+    public static func transaction(data: TW_Aeternity_Proto_SigningInput, signature: Data) -> String {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        let signatureData = TWDataCreateWithNSData(signature)
+        defer {
+            TWDataDelete(signatureData)
+        }
+        return TWStringNSString(TWAeternitySignerTransaction(dataData, signatureData))
+    }
+
     let rawValue: OpaquePointer
 
     init(rawValue: OpaquePointer) {
