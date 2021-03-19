@@ -13,9 +13,15 @@ See [WalletCoreExample](https://github.com/hewigovens/WalletCoreExample/tree/mas
 ## Update
 
 git clone https://github.com/binance-chain/wallet-core.git
+
 cd wallet-core
+
 ./tools/ios-release
+
 mv TrustWalletCore-iOS-0.12.28.zip ../wallet-core-carthage
+
 unzip TrustWalletCore-iOS-0.12.28.zip -d wallet-core
+
 carthage update --platform iOS
+
 xcodegen && xcodebuild
