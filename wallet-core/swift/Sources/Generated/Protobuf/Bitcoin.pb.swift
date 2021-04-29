@@ -144,6 +144,23 @@ public struct TW_Bitcoin_Proto_UnspentTransaction {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+/// Pair of destination address and amount, used for extra outputs
+public struct TW_Bitcoin_Proto_OutputAddress {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Destination address
+  public var toAddress: String = String()
+
+  /// Amount to be paid to this output
+  public var amount: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 /// Input data necessary to create a signed transaction.
 public struct TW_Bitcoin_Proto_SigningInput {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -179,6 +196,9 @@ public struct TW_Bitcoin_Proto_SigningInput {
 
   /// Coin type (forks).
   public var coinType: UInt32 = 0
+
+  /// Optional additional destination addresses, additional to first to_address output
+  public var extraOutputs: [TW_Bitcoin_Proto_OutputAddress] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -539,6 +559,41 @@ extension TW_Bitcoin_Proto_UnspentTransaction: SwiftProtobuf.Message, SwiftProto
   }
 }
 
+extension TW_Bitcoin_Proto_OutputAddress: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OutputAddress"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "to_address"),
+    2: .same(proto: "amount"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.toAddress)
+      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.toAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.toAddress, fieldNumber: 1)
+    }
+    if self.amount != 0 {
+      try visitor.visitSingularInt64Field(value: self.amount, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Bitcoin_Proto_OutputAddress, rhs: TW_Bitcoin_Proto_OutputAddress) -> Bool {
+    if lhs.toAddress != rhs.toAddress {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SigningInput"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -552,6 +607,7 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     12: .same(proto: "utxo"),
     13: .standard(proto: "use_max_amount"),
     14: .standard(proto: "coin_type"),
+    15: .standard(proto: "extra_outputs"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -567,6 +623,7 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
       case 12: try decoder.decodeRepeatedMessageField(value: &self.utxo)
       case 13: try decoder.decodeSingularBoolField(value: &self.useMaxAmount)
       case 14: try decoder.decodeSingularUInt32Field(value: &self.coinType)
+      case 15: try decoder.decodeRepeatedMessageField(value: &self.extraOutputs)
       default: break
       }
     }
@@ -603,6 +660,9 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     if self.coinType != 0 {
       try visitor.visitSingularUInt32Field(value: self.coinType, fieldNumber: 14)
     }
+    if !self.extraOutputs.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.extraOutputs, fieldNumber: 15)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -617,6 +677,7 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.utxo != rhs.utxo {return false}
     if lhs.useMaxAmount != rhs.useMaxAmount {return false}
     if lhs.coinType != rhs.coinType {return false}
+    if lhs.extraOutputs != rhs.extraOutputs {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
