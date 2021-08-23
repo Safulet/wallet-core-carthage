@@ -38,4 +38,6 @@ public enum Blockchain: UInt32, CaseIterable {
     case algorand = 27
     case ton = 28
     case neo = 29
+    case polkadot = 30
+    case kusama = 31
 }

@@ -19,6 +19,14 @@ public final class BitcoinTransactionSigner {
         return TWDataNSData(TWBitcoinTransactionSignerMessage(dataData))
     }
 
+    public static func messageSegWit(data: TW_Bitcoin_Proto_SigningInput) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        return TWDataNSData(TWBitcoinTransactionSignerMessageSegWit(dataData))
+    }
+
     public static func transaction(data: TW_Bitcoin_Proto_SigningInput, plan: TW_Bitcoin_Proto_TransactionPlan) -> Data {
         let dataData = TWDataCreateWithNSData(try! data.serializedData())
         defer {
@@ -29,6 +37,18 @@ public final class BitcoinTransactionSigner {
             TWDataDelete(planData)
         }
         return TWDataNSData(TWBitcoinTransactionSignerTransaction(dataData, planData))
+    }
+
+    public static func transactionSegWit(data: TW_Bitcoin_Proto_SigningInput, plan: TW_Bitcoin_Proto_TransactionPlan) -> Data {
+        let dataData = TWDataCreateWithNSData(try! data.serializedData())
+        defer {
+            TWDataDelete(dataData)
+        }
+        let planData = TWDataCreateWithNSData(try! plan.serializedData())
+        defer {
+            TWDataDelete(planData)
+        }
+        return TWDataNSData(TWBitcoinTransactionSignerTransactionSegWit(dataData, planData))
     }
 
     let rawValue: OpaquePointer

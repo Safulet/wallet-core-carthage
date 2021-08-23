@@ -27,7 +27,7 @@ public struct TW_Cosmos_Proto_Amount {
 
   public var denom: String = String()
 
-  public var amount: Int64 = 0
+  public var amount: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -436,7 +436,7 @@ extension TW_Cosmos_Proto_Amount: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.denom)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 2: try decoder.decodeSingularStringField(value: &self.amount)
       default: break
       }
     }
@@ -446,8 +446,8 @@ extension TW_Cosmos_Proto_Amount: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.denom.isEmpty {
       try visitor.visitSingularStringField(value: self.denom, fieldNumber: 1)
     }
-    if self.amount != 0 {
-      try visitor.visitSingularInt64Field(value: self.amount, fieldNumber: 2)
+    if !self.amount.isEmpty {
+      try visitor.visitSingularStringField(value: self.amount, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
