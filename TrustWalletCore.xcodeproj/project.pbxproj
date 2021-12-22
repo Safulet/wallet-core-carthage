@@ -470,6 +470,7 @@
 		AF5FA29BC0643E6BE15B9F89 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49B75BF62C28DA6131FA6A /* AES.swift */; };
 		AF83788CB55E3615B9C1B9D2 /* Binance.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C09CD346DD31A6B7BAAAE12 /* Binance.pb.swift */; };
 		AFC3A9B3C03EAD143AD9E945 /* TWSolanaSigner.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F73132C9E2CD4905F59C12 /* TWSolanaSigner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFD51F685FC940FA0DAAD8CA /* TWCosmos_oldProto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C4BCF51A188316C1577B629 /* TWCosmos_oldProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFD99C948785E2757D8F66E9 /* TWRippleAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F79F5F26E1367CDA6D6711F /* TWRippleAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B046E308A9474784CB6DECF8 /* NEARAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B77AE42451FDDE36ABBACC /* NEARAddress.swift */; };
 		B0543A28CFFD621D6189018D /* OntologySigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A5D047D396D5D187B78F10 /* OntologySigner.swift */; };
@@ -561,6 +562,7 @@
 		D35126AD7D101AAFF074D669 /* TWThetaProto.h in Headers */ = {isa = PBXBuildFile; fileRef = FE488C904224A9EA95E335BD /* TWThetaProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4D73276970A21E3B155D75C /* TWTONAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 2362A1B3F53B27DF71200E6A /* TWTONAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D5247923B40295CEC59D9E75 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D05C0B34F950FDF69F5706 /* Curve.swift */; };
+		D5AC48929F4FE37EC0DC3E6E /* TWCosmos_oldProto.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C4BCF51A188316C1577B629 /* TWCosmos_oldProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6B2E9D7F9097D445B083109 /* TWData.h in Headers */ = {isa = PBXBuildFile; fileRef = 207C43E2610BBB3F73B68534 /* TWData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D700942FFE5C64F47BFBD44D /* TrustWalletCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C6511B677C39C3665D12874 /* TrustWalletCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D73F012F4338173F890C005D /* TWSolanaAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 442BC8EE9C64D13496B8666D /* TWSolanaAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -910,6 +912,7 @@
 		9B02DBC2B6FDE8535A9E8335 /* TWCoinTypeConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWCoinTypeConfiguration.h; sourceTree = "<group>"; };
 		9B0CE88D5A064D757B7E0AEF /* Aeternity+Proto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aeternity+Proto.swift"; sourceTree = "<group>"; };
 		9BC4127515EC2717A0351DE9 /* TWAeternitySigner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWAeternitySigner.h; sourceTree = "<group>"; };
+		9C4BCF51A188316C1577B629 /* TWCosmos_oldProto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWCosmos_oldProto.h; sourceTree = "<group>"; };
 		9CCD4B8895C55956AF6C16F5 /* TWRippleXAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWRippleXAddress.h; sourceTree = "<group>"; };
 		9CD2440C6362B9A45A7354CA /* TWKeyDerivation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWKeyDerivation.h; sourceTree = "<group>"; };
 		9D3BC1C3E4D53A80A48362D7 /* Aeternity.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aeternity.pb.swift; sourceTree = "<group>"; };
@@ -1130,6 +1133,7 @@
 				B0BE74CA27E94FDC47845980 /* TWCoinType.h */,
 				9B02DBC2B6FDE8535A9E8335 /* TWCoinTypeConfiguration.h */,
 				977B8BF9EFD3B0A63761A889 /* TWCommonProto.h */,
+				9C4BCF51A188316C1577B629 /* TWCosmos_oldProto.h */,
 				DA81EE8F7D0E5492C5557A2E /* TWCosmosAddress.h */,
 				52D5362BC6F063E39D504498 /* TWCosmosProto.h */,
 				E825AC1CAAC8816DC065AF42 /* TWCosmosSigner.h */,
@@ -1586,6 +1590,7 @@
 				9DB62E2118F893B498656C4F /* TWCosmosAddress.h in Headers */,
 				B8AAC8CA93522BF1D90E0396 /* TWCosmosProto.h in Headers */,
 				BC31E87DB4368CC7370AFF07 /* TWCosmosSigner.h in Headers */,
+				D5AC48929F4FE37EC0DC3E6E /* TWCosmos_oldProto.h in Headers */,
 				8A27D2763BB5F469893461F1 /* TWCurve.h in Headers */,
 				59C4258E42D58C5EFCFA8960 /* TWData.h in Headers */,
 				02C31A463F435F150F7A0C33 /* TWDecredAddress.h in Headers */,
@@ -1739,6 +1744,7 @@
 				FBE4CA949F4B901F9E81344C /* TWCosmosAddress.h in Headers */,
 				FCFF53D55743210DD8217E1D /* TWCosmosProto.h in Headers */,
 				DD8BA00C8C1B066D7DA88C63 /* TWCosmosSigner.h in Headers */,
+				AFD51F685FC940FA0DAAD8CA /* TWCosmos_oldProto.h in Headers */,
 				82DEEACBB5C68134E3883FF9 /* TWCurve.h in Headers */,
 				D6B2E9D7F9097D445B083109 /* TWData.h in Headers */,
 				9F4F348F706BDA380D2CEA80 /* TWDecredAddress.h in Headers */,
@@ -2356,6 +2362,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2413,7 +2420,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2477,7 +2483,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2508,6 +2513,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

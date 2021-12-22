@@ -19,6 +19,97 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+public struct TW_Stellar_Proto_Asset {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Optional in case of non-native asset; the asset issuer address
+  public var issuer: String = String()
+
+  /// Optional in case of non-native asset; the asset alphanum4 code.
+  public var alphanum4: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct TW_Stellar_Proto_OperationCreateAccount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var destination: String = String()
+
+  /// Amount (*10^7)
+  public var amount: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct TW_Stellar_Proto_OperationPayment {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var destination: String {
+    get {return _storage._destination}
+    set {_uniqueStorage()._destination = newValue}
+  }
+
+  /// Optional, can be left empty for native asset
+  public var asset: TW_Stellar_Proto_Asset {
+    get {return _storage._asset ?? TW_Stellar_Proto_Asset()}
+    set {_uniqueStorage()._asset = newValue}
+  }
+  /// Returns true if `asset` has been explicitly set.
+  public var hasAsset: Bool {return _storage._asset != nil}
+  /// Clears the value of `asset`. Subsequent reads from it will return its default value.
+  public mutating func clearAsset() {_uniqueStorage()._asset = nil}
+
+  /// Amount (*10^7)
+  public var amount: Int64 {
+    get {return _storage._amount}
+    set {_uniqueStorage()._amount = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+public struct TW_Stellar_Proto_OperationChangeTrust {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var asset: TW_Stellar_Proto_Asset {
+    get {return _storage._asset ?? TW_Stellar_Proto_Asset()}
+    set {_uniqueStorage()._asset = newValue}
+  }
+  /// Returns true if `asset` has been explicitly set.
+  public var hasAsset: Bool {return _storage._asset != nil}
+  /// Clears the value of `asset`. Subsequent reads from it will return its default value.
+  public mutating func clearAsset() {_uniqueStorage()._asset = nil}
+
+  /// Validity (time bound to), unix time.  Set to (now() + 2 * 365 * 86400) for 2 years; set to 0 for missing.
+  public var validBefore: Int64 {
+    get {return _storage._validBefore}
+    set {_uniqueStorage()._validBefore = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
 public struct TW_Stellar_Proto_MemoVoid {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -71,11 +162,6 @@ public struct TW_Stellar_Proto_SigningInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var amount: Int64 {
-    get {return _storage._amount}
-    set {_uniqueStorage()._amount = newValue}
-  }
-
   public var fee: Int32 {
     get {return _storage._fee}
     set {_uniqueStorage()._fee = newValue}
@@ -91,15 +177,44 @@ public struct TW_Stellar_Proto_SigningInput {
     set {_uniqueStorage()._account = newValue}
   }
 
-  public var destination: String {
-    get {return _storage._destination}
-    set {_uniqueStorage()._destination = newValue}
-  }
-
   /// Private key.
   public var privateKey: Data {
     get {return _storage._privateKey}
     set {_uniqueStorage()._privateKey = newValue}
+  }
+
+  public var passphrase: String {
+    get {return _storage._passphrase}
+    set {_uniqueStorage()._passphrase = newValue}
+  }
+
+  public var operationOneof: OneOf_OperationOneof? {
+    get {return _storage._operationOneof}
+    set {_uniqueStorage()._operationOneof = newValue}
+  }
+
+  public var opCreateAccount: TW_Stellar_Proto_OperationCreateAccount {
+    get {
+      if case .opCreateAccount(let v)? = _storage._operationOneof {return v}
+      return TW_Stellar_Proto_OperationCreateAccount()
+    }
+    set {_uniqueStorage()._operationOneof = .opCreateAccount(newValue)}
+  }
+
+  public var opPayment: TW_Stellar_Proto_OperationPayment {
+    get {
+      if case .opPayment(let v)? = _storage._operationOneof {return v}
+      return TW_Stellar_Proto_OperationPayment()
+    }
+    set {_uniqueStorage()._operationOneof = .opPayment(newValue)}
+  }
+
+  public var opChangeTrust: TW_Stellar_Proto_OperationChangeTrust {
+    get {
+      if case .opChangeTrust(let v)? = _storage._operationOneof {return v}
+      return TW_Stellar_Proto_OperationChangeTrust()
+    }
+    set {_uniqueStorage()._operationOneof = .opChangeTrust(newValue)}
   }
 
   public var memoTypeOneof: OneOf_MemoTypeOneof? {
@@ -147,17 +262,29 @@ public struct TW_Stellar_Proto_SigningInput {
     set {_uniqueStorage()._memoTypeOneof = .memoReturnHash(newValue)}
   }
 
-  public var operationType: TW_Stellar_Proto_SigningInput.OperationType {
-    get {return _storage._operationType}
-    set {_uniqueStorage()._operationType = newValue}
-  }
-
-  public var passphrase: String {
-    get {return _storage._passphrase}
-    set {_uniqueStorage()._passphrase = newValue}
+  public var timeBounds: Int64 {
+    get {return _storage._timeBounds}
+    set {_uniqueStorage()._timeBounds = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum OneOf_OperationOneof: Equatable {
+    case opCreateAccount(TW_Stellar_Proto_OperationCreateAccount)
+    case opPayment(TW_Stellar_Proto_OperationPayment)
+    case opChangeTrust(TW_Stellar_Proto_OperationChangeTrust)
+
+  #if !swift(>=4.1)
+    public static func ==(lhs: TW_Stellar_Proto_SigningInput.OneOf_OperationOneof, rhs: TW_Stellar_Proto_SigningInput.OneOf_OperationOneof) -> Bool {
+      switch (lhs, rhs) {
+      case (.opCreateAccount(let l), .opCreateAccount(let r)): return l == r
+      case (.opPayment(let l), .opPayment(let r)): return l == r
+      case (.opChangeTrust(let l), .opChangeTrust(let r)): return l == r
+      default: return false
+      }
+    }
+  #endif
+  }
 
   public enum OneOf_MemoTypeOneof: Equatable {
     case memoVoid(TW_Stellar_Proto_MemoVoid)
@@ -180,50 +307,10 @@ public struct TW_Stellar_Proto_SigningInput {
   #endif
   }
 
-  public enum OperationType: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-    case createAccount // = 0
-    case payment // = 1
-    case UNRECOGNIZED(Int)
-
-    public init() {
-      self = .createAccount
-    }
-
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .createAccount
-      case 1: self = .payment
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
-
-    public var rawValue: Int {
-      switch self {
-      case .createAccount: return 0
-      case .payment: return 1
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
-  }
-
   public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
-
-#if swift(>=4.2)
-
-extension TW_Stellar_Proto_SigningInput.OperationType: CaseIterable {
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [TW_Stellar_Proto_SigningInput.OperationType] = [
-    .createAccount,
-    .payment,
-  ]
-}
-
-#endif  // swift(>=4.2)
 
 /// Transaction signing output.
 public struct TW_Stellar_Proto_SigningOutput {
@@ -242,6 +329,222 @@ public struct TW_Stellar_Proto_SigningOutput {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "TW.Stellar.Proto"
+
+extension TW_Stellar_Proto_Asset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Asset"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "issuer"),
+    2: .same(proto: "alphanum4"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.issuer)
+      case 2: try decoder.decodeSingularStringField(value: &self.alphanum4)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.issuer.isEmpty {
+      try visitor.visitSingularStringField(value: self.issuer, fieldNumber: 1)
+    }
+    if !self.alphanum4.isEmpty {
+      try visitor.visitSingularStringField(value: self.alphanum4, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Stellar_Proto_Asset, rhs: TW_Stellar_Proto_Asset) -> Bool {
+    if lhs.issuer != rhs.issuer {return false}
+    if lhs.alphanum4 != rhs.alphanum4 {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Stellar_Proto_OperationCreateAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OperationCreateAccount"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "destination"),
+    2: .same(proto: "amount"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.destination)
+      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.destination.isEmpty {
+      try visitor.visitSingularStringField(value: self.destination, fieldNumber: 1)
+    }
+    if self.amount != 0 {
+      try visitor.visitSingularInt64Field(value: self.amount, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Stellar_Proto_OperationCreateAccount, rhs: TW_Stellar_Proto_OperationCreateAccount) -> Bool {
+    if lhs.destination != rhs.destination {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Stellar_Proto_OperationPayment: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OperationPayment"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "destination"),
+    2: .same(proto: "asset"),
+    3: .same(proto: "amount"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _destination: String = String()
+    var _asset: TW_Stellar_Proto_Asset? = nil
+    var _amount: Int64 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _destination = source._destination
+      _asset = source._asset
+      _amount = source._amount
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularStringField(value: &_storage._destination)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._asset)
+        case 3: try decoder.decodeSingularInt64Field(value: &_storage._amount)
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._destination.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._destination, fieldNumber: 1)
+      }
+      if let v = _storage._asset {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+      if _storage._amount != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._amount, fieldNumber: 3)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Stellar_Proto_OperationPayment, rhs: TW_Stellar_Proto_OperationPayment) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._destination != rhs_storage._destination {return false}
+        if _storage._asset != rhs_storage._asset {return false}
+        if _storage._amount != rhs_storage._amount {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Stellar_Proto_OperationChangeTrust: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".OperationChangeTrust"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "asset"),
+    2: .standard(proto: "valid_before"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _asset: TW_Stellar_Proto_Asset? = nil
+    var _validBefore: Int64 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _asset = source._asset
+      _validBefore = source._validBefore
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._asset)
+        case 2: try decoder.decodeSingularInt64Field(value: &_storage._validBefore)
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._asset {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if _storage._validBefore != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._validBefore, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Stellar_Proto_OperationChangeTrust, rhs: TW_Stellar_Proto_OperationChangeTrust) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._asset != rhs_storage._asset {return false}
+        if _storage._validBefore != rhs_storage._validBefore {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
 
 extension TW_Stellar_Proto_MemoVoid: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".MemoVoid"
@@ -352,46 +655,45 @@ extension TW_Stellar_Proto_MemoHash: SwiftProtobuf.Message, SwiftProtobuf._Messa
 extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SigningInput"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "amount"),
-    2: .same(proto: "fee"),
-    3: .same(proto: "sequence"),
-    4: .same(proto: "account"),
-    5: .same(proto: "destination"),
-    6: .standard(proto: "private_key"),
-    7: .standard(proto: "memo_void"),
-    8: .standard(proto: "memo_text"),
-    9: .standard(proto: "memo_id"),
-    10: .standard(proto: "memo_hash"),
-    11: .standard(proto: "memo_return_hash"),
-    12: .standard(proto: "operation_type"),
-    13: .same(proto: "passphrase"),
+    1: .same(proto: "fee"),
+    2: .same(proto: "sequence"),
+    3: .same(proto: "account"),
+    4: .standard(proto: "private_key"),
+    5: .same(proto: "passphrase"),
+    6: .standard(proto: "op_create_account"),
+    7: .standard(proto: "op_payment"),
+    8: .standard(proto: "op_change_trust"),
+    9: .standard(proto: "memo_void"),
+    10: .standard(proto: "memo_text"),
+    11: .standard(proto: "memo_id"),
+    12: .standard(proto: "memo_hash"),
+    13: .standard(proto: "memo_return_hash"),
+    14: .standard(proto: "time_bounds"),
   ]
 
   fileprivate class _StorageClass {
-    var _amount: Int64 = 0
     var _fee: Int32 = 0
     var _sequence: Int64 = 0
     var _account: String = String()
-    var _destination: String = String()
     var _privateKey: Data = SwiftProtobuf.Internal.emptyData
-    var _memoTypeOneof: TW_Stellar_Proto_SigningInput.OneOf_MemoTypeOneof?
-    var _operationType: TW_Stellar_Proto_SigningInput.OperationType = .createAccount
     var _passphrase: String = String()
+    var _operationOneof: TW_Stellar_Proto_SigningInput.OneOf_OperationOneof?
+    var _memoTypeOneof: TW_Stellar_Proto_SigningInput.OneOf_MemoTypeOneof?
+    var _timeBounds: Int64 = 0
 
     static let defaultInstance = _StorageClass()
 
     private init() {}
 
     init(copying source: _StorageClass) {
-      _amount = source._amount
       _fee = source._fee
       _sequence = source._sequence
       _account = source._account
-      _destination = source._destination
       _privateKey = source._privateKey
-      _memoTypeOneof = source._memoTypeOneof
-      _operationType = source._operationType
       _passphrase = source._passphrase
+      _operationOneof = source._operationOneof
+      _memoTypeOneof = source._memoTypeOneof
+      _timeBounds = source._timeBounds
     }
   }
 
@@ -407,13 +709,36 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 1: try decoder.decodeSingularInt64Field(value: &_storage._amount)
-        case 2: try decoder.decodeSingularInt32Field(value: &_storage._fee)
-        case 3: try decoder.decodeSingularInt64Field(value: &_storage._sequence)
-        case 4: try decoder.decodeSingularStringField(value: &_storage._account)
-        case 5: try decoder.decodeSingularStringField(value: &_storage._destination)
-        case 6: try decoder.decodeSingularBytesField(value: &_storage._privateKey)
+        case 1: try decoder.decodeSingularInt32Field(value: &_storage._fee)
+        case 2: try decoder.decodeSingularInt64Field(value: &_storage._sequence)
+        case 3: try decoder.decodeSingularStringField(value: &_storage._account)
+        case 4: try decoder.decodeSingularBytesField(value: &_storage._privateKey)
+        case 5: try decoder.decodeSingularStringField(value: &_storage._passphrase)
+        case 6:
+          var v: TW_Stellar_Proto_OperationCreateAccount?
+          if let current = _storage._operationOneof {
+            try decoder.handleConflictingOneOf()
+            if case .opCreateAccount(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._operationOneof = .opCreateAccount(v)}
         case 7:
+          var v: TW_Stellar_Proto_OperationPayment?
+          if let current = _storage._operationOneof {
+            try decoder.handleConflictingOneOf()
+            if case .opPayment(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._operationOneof = .opPayment(v)}
+        case 8:
+          var v: TW_Stellar_Proto_OperationChangeTrust?
+          if let current = _storage._operationOneof {
+            try decoder.handleConflictingOneOf()
+            if case .opChangeTrust(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._operationOneof = .opChangeTrust(v)}
+        case 9:
           var v: TW_Stellar_Proto_MemoVoid?
           if let current = _storage._memoTypeOneof {
             try decoder.handleConflictingOneOf()
@@ -421,7 +746,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._memoTypeOneof = .memoVoid(v)}
-        case 8:
+        case 10:
           var v: TW_Stellar_Proto_MemoText?
           if let current = _storage._memoTypeOneof {
             try decoder.handleConflictingOneOf()
@@ -429,7 +754,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._memoTypeOneof = .memoText(v)}
-        case 9:
+        case 11:
           var v: TW_Stellar_Proto_MemoId?
           if let current = _storage._memoTypeOneof {
             try decoder.handleConflictingOneOf()
@@ -437,7 +762,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._memoTypeOneof = .memoID(v)}
-        case 10:
+        case 12:
           var v: TW_Stellar_Proto_MemoHash?
           if let current = _storage._memoTypeOneof {
             try decoder.handleConflictingOneOf()
@@ -445,7 +770,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._memoTypeOneof = .memoHash(v)}
-        case 11:
+        case 13:
           var v: TW_Stellar_Proto_MemoHash?
           if let current = _storage._memoTypeOneof {
             try decoder.handleConflictingOneOf()
@@ -453,8 +778,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._memoTypeOneof = .memoReturnHash(v)}
-        case 12: try decoder.decodeSingularEnumField(value: &_storage._operationType)
-        case 13: try decoder.decodeSingularStringField(value: &_storage._passphrase)
+        case 14: try decoder.decodeSingularInt64Field(value: &_storage._timeBounds)
         default: break
         }
       }
@@ -463,42 +787,45 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if _storage._amount != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._amount, fieldNumber: 1)
-      }
       if _storage._fee != 0 {
-        try visitor.visitSingularInt32Field(value: _storage._fee, fieldNumber: 2)
+        try visitor.visitSingularInt32Field(value: _storage._fee, fieldNumber: 1)
       }
       if _storage._sequence != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._sequence, fieldNumber: 3)
+        try visitor.visitSingularInt64Field(value: _storage._sequence, fieldNumber: 2)
       }
       if !_storage._account.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._account, fieldNumber: 4)
-      }
-      if !_storage._destination.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._destination, fieldNumber: 5)
+        try visitor.visitSingularStringField(value: _storage._account, fieldNumber: 3)
       }
       if !_storage._privateKey.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._privateKey, fieldNumber: 6)
+        try visitor.visitSingularBytesField(value: _storage._privateKey, fieldNumber: 4)
+      }
+      if !_storage._passphrase.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._passphrase, fieldNumber: 5)
+      }
+      switch _storage._operationOneof {
+      case .opCreateAccount(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      case .opPayment(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      case .opChangeTrust(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      case nil: break
       }
       switch _storage._memoTypeOneof {
       case .memoVoid(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-      case .memoText(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-      case .memoID(let v)?:
         try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
-      case .memoHash(let v)?:
+      case .memoText(let v)?:
         try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-      case .memoReturnHash(let v)?:
+      case .memoID(let v)?:
         try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      case .memoHash(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      case .memoReturnHash(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
       case nil: break
       }
-      if _storage._operationType != .createAccount {
-        try visitor.visitSingularEnumField(value: _storage._operationType, fieldNumber: 12)
-      }
-      if !_storage._passphrase.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._passphrase, fieldNumber: 13)
+      if _storage._timeBounds != 0 {
+        try visitor.visitSingularInt64Field(value: _storage._timeBounds, fieldNumber: 14)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -509,15 +836,14 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
         let rhs_storage = _args.1
-        if _storage._amount != rhs_storage._amount {return false}
         if _storage._fee != rhs_storage._fee {return false}
         if _storage._sequence != rhs_storage._sequence {return false}
         if _storage._account != rhs_storage._account {return false}
-        if _storage._destination != rhs_storage._destination {return false}
         if _storage._privateKey != rhs_storage._privateKey {return false}
-        if _storage._memoTypeOneof != rhs_storage._memoTypeOneof {return false}
-        if _storage._operationType != rhs_storage._operationType {return false}
         if _storage._passphrase != rhs_storage._passphrase {return false}
+        if _storage._operationOneof != rhs_storage._operationOneof {return false}
+        if _storage._memoTypeOneof != rhs_storage._memoTypeOneof {return false}
+        if _storage._timeBounds != rhs_storage._timeBounds {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -525,13 +851,6 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
-}
-
-extension TW_Stellar_Proto_SigningInput.OperationType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "CREATE_ACCOUNT"),
-    1: .same(proto: "PAYMENT"),
-  ]
 }
 
 extension TW_Stellar_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
